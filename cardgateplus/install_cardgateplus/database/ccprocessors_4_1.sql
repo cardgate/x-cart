@@ -1,0 +1,48 @@
+REPLACE INTO `%s`
+	(
+	`module_name`,
+	`type`,
+	`processor`,
+	`template`,
+	`param01`,
+	`param02`,
+	`param03`,
+	`param04`,
+	`param05`,
+	`param06`,
+	`param07`,
+	`param08`,
+	`param09`,
+	`disable_ccinfo`,
+	`background`,
+	`testmode`,
+	`is_check`,
+	`is_refund`,
+	`c_template`,
+	`paymentid`,
+	`cmpi`
+	)
+VALUES
+	(
+	'CardGatePlus %s',
+	'C',
+	'cc_cgp_%3$s.php',
+	'cc_cgp_%3$s.tpl',
+	'%4$s',
+	'%5s',
+	'0',
+	'xxxx',
+	'EUR',
+	'DETECT',
+	'N',
+	'cgp',
+	'DETECT',
+	'Y',
+	'N',
+	'N',
+	'Y',
+	'',
+	'',
+	%6$s,
+	''
+);
