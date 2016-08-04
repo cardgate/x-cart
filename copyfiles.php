@@ -114,6 +114,18 @@ $src = '../skin/common_files/payments/cc_cgp_paypal.tpl';
 $dst = 'cardgateplus/install_cardgateplus/files/payments/cc_cgp_paypal.tpl';
 $is_dir = false;
 array_push( $data, data_element( $src, $dst, $is_dir ) );
+$src = '../skin/common_files/payments/cc_cgp_afterpay.tpl';
+$dst = 'cardgateplus/install_cardgateplus/files/payments/cc_cgp_afterpay.tpl';
+$is_dir = false;
+array_push( $data, data_element( $src, $dst, $is_dir ) );
+$src = '../skin/common_files/payments/cc_cgp_klarna.tpl';
+$dst = 'cardgateplus/install_cardgateplus/files/payments/cc_cgp_klarna.tpl';
+$is_dir = false;
+array_push( $data, data_element( $src, $dst, $is_dir ) );
+$src = '../skin/common_files/payments/cc_cgp_bitcoin.tpl';
+$dst = 'cardgateplus/install_cardgateplus/files/payments/cc_cgp_bitcoin.tpl';
+$is_dir = false;
+array_push( $data, data_element( $src, $dst, $is_dir ) );
 
 $src = '../payment/cardgateplus/';
 $dst = 'cardgateplus/payment/cardgateplus/';
@@ -152,8 +164,18 @@ $src = '../payment/cc_cgp_paypal.php';
 $dst = 'cardgateplus/payment/cc_cgp_paypal.php';
 $is_dir = false;
 array_push( $data, data_element( $src, $dst, $is_dir ) );
-
-
+$src = '../payment/cc_cgp_afterpay.php';
+$dst = 'cardgateplus/payment/cc_cgp_afterpay.php';
+$is_dir = false;
+array_push( $data, data_element( $src, $dst, $is_dir ) );
+$src = '../payment/cc_cgp_bitcoin.php';
+$dst = 'cardgateplus/payment/cc_cgp_bitcoin.php';
+$is_dir = false;
+array_push( $data, data_element( $src, $dst, $is_dir ) );
+$src = '../payment/cc_cgp_klarna.php';
+$dst = 'cardgateplus/payment/cc_cgp_klarna.php';
+$is_dir = false;
+array_push( $data, data_element( $src, $dst, $is_dir ) );
 
 
 // copy files

@@ -21,6 +21,9 @@ $files = array(
     "../payment/cc_cgp_mistercash.php",
     "../payment/cc_cgp_paypal.php",
     "../payment/cc_cgp_giropay.php",
+    "../payment/cc_cgp_afterpay.php",
+    "../payment/cc_cgp_klarna.php",
+    "../payment/cc_cgp_bitcoin.php",
     "../payment/cc_cgp_directdebit.php",
     "../payment/cc_cgp_banktransfer.php",
     "../payment/cgp_notify.php",
@@ -37,6 +40,9 @@ $payment_names['directebanking'] = 'DIRECTebanking';
 $payment_names['mistercash'] = 'MisterCash';
 $payment_names['paypal'] = 'PayPal';
 $payment_names['giropay'] = 'Giropay';
+$payment_names['afterpay'] = 'Afterpay';
+$payment_names['bitcoin'] = 'Bitcoin';
+$payment_names['klarna'] = 'Klarna';
 $payment_names['directdebit'] = 'Direct Debit';
 $payment_names['banktransfer'] = 'Bank Transfer';
 
@@ -47,6 +53,9 @@ $payment_templates['directebanking'] = 'cgp_directebanking.tpl';
 $payment_templates['mistercash'] = 'cgp_mistercash.tpl';
 $payment_templates['paypal'] = 'cgp_paypal.tpl';
 $payment_templates['giropay'] = 'cgp_giropay.tpl';
+$payment_templates['afterpay'] = 'cgp_afterpay.tpl';
+$payment_templates['klarna'] = 'cgp_klarna.tpl';
+$payment_templates['bitcoin'] = 'cgp_bitcoin.tpl';
 $payment_templates['directdebit'] = 'cgp_directdebit.tpl';
 $payment_templates['banktransfer'] = 'cgp_banktransfer.tpl';
 
