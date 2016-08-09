@@ -26,6 +26,7 @@ $files = array(
     "../payment/cc_cgp_bitcoin.php",
     "../payment/cc_cgp_directdebit.php",
     "../payment/cc_cgp_banktransfer.php",
+    "../payment/cc_cgp_przelewy24.php",
     "../payment/cgp_notify.php",
     "../payment/cardgateplus/cardgateplus_lib.php",
     "../payment/cardgateplus/getback.php",
@@ -45,6 +46,7 @@ $payment_names['bitcoin'] = 'Bitcoin';
 $payment_names['klarna'] = 'Klarna';
 $payment_names['directdebit'] = 'Direct Debit';
 $payment_names['banktransfer'] = 'Bank Transfer';
+$payment_names['przelewy24'] = 'Przelewy24';
 
 $payment_templates = array();
 $payment_templates['ideal'] = 'cgp_ideal.tpl';
@@ -58,6 +60,7 @@ $payment_templates['klarna'] = 'cgp_klarna.tpl';
 $payment_templates['bitcoin'] = 'cgp_bitcoin.tpl';
 $payment_templates['directdebit'] = 'cgp_directdebit.tpl';
 $payment_templates['banktransfer'] = 'cgp_banktransfer.tpl';
+$payment_templates['przelewy24'] = 'cgp_przelewy24.tpl';
 
 function connectDatabase( $host, $user, $pass, $dbname ) {
     if ( !mysql_connect( $host, $user, $pass ) ) {

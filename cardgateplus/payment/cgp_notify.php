@@ -30,6 +30,10 @@
 		}
 		
 		$pm_method 	= $_POST['billing_option'];
+                
+                if ($pm_method == 'sofortbanking'){
+                    $pm_method = 'directebanking';
+                }
 		
 		// instantiate class if the payment method is valid
 		$cardgateplus 	= new cgp_gen($pm_method);

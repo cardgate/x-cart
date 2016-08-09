@@ -1,7 +1,7 @@
 <?php
 
 // Version information
-define('CARDGATEPLUS_PLUGIN_VERSION',	"1.05");
+define('CARDGATEPLUS_PLUGIN_VERSION',	"1.06");
 define('XCART_COMPATIBILITY',"X-Cart GOLD & PRO<br/>version 4.4.0 - 4.6.+");
 
 // Default skin directory

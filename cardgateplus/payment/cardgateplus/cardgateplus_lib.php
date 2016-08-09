@@ -70,7 +70,8 @@ class cgp_generic {
         'banktransfer',
         'afterpay',
         'bitcoin',
-        'klarna'
+        'klarna',
+        'przelewy24'
     );
 
     function __construct( $pm_type ) {
