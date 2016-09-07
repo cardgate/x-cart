@@ -31,7 +31,8 @@ $files = array(
     "../payment/cardgateplus/cardgateplus_lib.php",
     "../payment/cardgateplus/getback.php",
     "../payment/cardgateplus/result.php",
-    "../include/templater/plugins/modifier.cgpbanks.php"
+    "../include/templater/plugins/modifier.cgpbanks.php",
+    "../include/templater/plugins/modifier.cgpgiftcarddetails.php"
 );
 
 $payment_names = array();
@@ -47,6 +48,7 @@ $payment_names['klarna'] = 'Klarna';
 $payment_names['directdebit'] = 'Direct Debit';
 $payment_names['banktransfer'] = 'Bank Transfer';
 $payment_names['przelewy24'] = 'Przelewy24';
+$payment_names['giftcard'] = 'Giftcard';
 
 $payment_templates = array();
 $payment_templates['ideal'] = 'cgp_ideal.tpl';
@@ -61,6 +63,7 @@ $payment_templates['bitcoin'] = 'cgp_bitcoin.tpl';
 $payment_templates['directdebit'] = 'cgp_directdebit.tpl';
 $payment_templates['banktransfer'] = 'cgp_banktransfer.tpl';
 $payment_templates['przelewy24'] = 'cgp_przelewy24.tpl';
+$payment_templates['giftcard'] = 'cgp_giftcard.tpl';
 
 function connectDatabase( $host, $user, $pass, $dbname ) {
     if ( !mysql_connect( $host, $user, $pass ) ) {
@@ -111,16 +114,18 @@ if ( ( int ) $current_step > 0 ) {
     }
 
     copy( 'files/customer/main/payment_cgp_ideal.tpl', $base_path . 'customer/main/payment_cgp_ideal.tpl' );
+    copy( 'files/customer/main/payment_cgp_giftcard.tpl', $base_path . 'customer/main/payment_cgp_giftcard.tpl' );
 }
 
 //Check for files
-if ( ( int ) $current_step > 1 ) {
+if ( ( int ) $current_step > 1 ) { 
 
     foreach ( $payment_templates as $payment_template ) {
         $files[] = ".." . $smarty_skin_dir . '/payments/cc_' . $payment_template;
     }
 
     $files[] = $base_path . 'customer/main/payment_cgp_ideal.tpl';
+    $files[] = $base_path . 'customer/main/payment_cgp_giftcard.tpl';
 
     for ( $i = 0; $i < count( $files ); $i++ ) {
         if ( !file_exists( $files[$i] ) )

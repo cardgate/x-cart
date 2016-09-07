@@ -71,7 +71,8 @@ class cgp_generic {
         'afterpay',
         'bitcoin',
         'klarna',
-        'przelewy24'
+        'przelewy24',
+        'giftcard'
     );
 
     function __construct( $pm_type ) {
@@ -226,7 +227,7 @@ class cgp_generic {
         $products = $cart['products'];
 
         foreach ( $products as $product ) {
-            $keys = func_query_hash("SELECT * FROM $sql_tbl[products] WHERE productid='".$product['productid']."'" );
+            $keys = func_query_hash( "SELECT * FROM $sql_tbl[products] WHERE productid='" . $product['productid'] . "'" );
             $item = array();
             $item['stock'] = $keys[$productid][0]['avail'];
             $item['quantity'] = $product['amount'];
@@ -270,9 +271,9 @@ class cgp_generic {
             $item['type'] = 4;
             $cartitems[] = $item;
         }
-        
+
         $paymentfee = $cart['payment_surcharge'];
-        
+
         if ( $paymentfee > 0 ) {
             $item = array();
             $item['quantity'] = 1;
@@ -287,7 +288,7 @@ class cgp_generic {
         }
 
         $fields = array();
-        
+
         $fields['siteid'] = $this->siteId;
         $fields['ref'] = $order_id;
         $fields['first_name'] = $userinfo['firstname'];
@@ -329,6 +330,12 @@ class cgp_generic {
         //with an iDEAL transaction, include the bank parameter
         if ( $this->pmType == 'ideal' ) {
             $fields['suboption'] = $_COOKIE['cgp_bank'];
+        }
+
+        // with giftcard, include cardnumber and pin
+        if ( $this->pmType == 'giftcard' ) {
+            $fields['cardnumber'] = $_COOKIE['cgp_cardnumber'];
+            $fields['pin'] = $_COOKIE['cgp_pin'];
         }
 
         // Update session status and order data
@@ -449,6 +456,22 @@ class cgp_generic {
 							exdate.setDate(exdate.getDate() + 365);
 							var c_value=escape(value) + "; expires=" + exdate.toUTCString();
 							document.cookie="cgp_bank=" + c_value;
+						}
+					</script>';
+        return $html;
+    }
+
+    function generateGiftcardScript() {
+        $html = '<script type="text/javascript">
+						function store_giftcarddetails(){
+							var exdate=new Date();
+							exdate.setDate(exdate.getDate() + 365);
+                                                        var value= document.getElementById("cgppin").value;
+							var c_value=escape(value) + "; expires=" + exdate.toUTCString();
+							document.cookie="cgp_pin=" + c_value;
+                                                        var value= document.getElementById("cgpcardnumber").value;
+							var c_value=escape(value) + "; expires=" + exdate.toUTCString();
+							document.cookie="cgp_cardnumber=" + c_value;
 						}
 					</script>';
         return $html;

@@ -45,7 +45,7 @@ if (!defined('XCART_START')) { header("Location: ../../../"); die("Access denied
 
 function smarty_modifier_cgpbanks($value)
 {
-	require './payment/cardgateplus/cardgateplus_lib.php';
+	require_once './payment/cardgateplus/cardgateplus_lib.php';
 	class cgp_ideal extends cgp_generic {
 	}
 	
