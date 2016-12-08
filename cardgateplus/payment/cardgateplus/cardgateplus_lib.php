@@ -478,14 +478,10 @@ class cgp_generic {
     }
 
     function getUrl() {
-        if ( !empty( $_SERVER['CGP_GATEWAY_URL'] ) ) {
-            return $_SERVER['CGP_GATEWAY_URL'];
+        if ( $this->testMode == 'Y' ) {
+            return "https://secure-staging.curopayments.net/gateway/cardgate/";
         } else {
-            if ( $this->testMode == 'Y' ) {
-                return "https://secure-staging.curopayments.net/gateway/cardgate/";
-            } else {
-                return "https://secure.curopayments.net/gateway/cardgate/";
-            }
+            return "https://secure.curopayments.net/gateway/cardgate/";
         }
     }
 
