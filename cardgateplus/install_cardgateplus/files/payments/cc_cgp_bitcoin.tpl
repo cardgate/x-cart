@@ -16,7 +16,7 @@ vim: set ts=2 sw=2 sts=2 et:
 </tr>
 <tr>
 	<td>Control URL:</td>
-	<td>{$http_location}/payment/cgp_notify.php</td>
+	<td>{$http_location}/payment/cc_cgp_bitcoin.php</td>
 </tr>
 <tr>
 	<td>Mode</td>

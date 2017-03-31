@@ -32,15 +32,15 @@
   \********************************************************************************** */
 
 ############################ Start ############################
-#                                                            														 	#
-#	The property of CardGatePlus http://www.cardgate.com             					#
-#	                                 						  															#
-#	Author : Richard Schoots	  							  											#
-#	Version : 1.0.1 Created : dt 22-07-2013                     				 					#
-#	Created For X-Cart                      				  												#
-#                                                             															#
-#	CardGatePlus Library class									  										#
-#                                                             															#
+#                                                              #
+#	The property of CardGatePlus http://www.cardgate.com       #
+#	                                 						   #
+#	Author : Richard Schoots	  							   #
+#	Version : 1.0.1 Created : dt 22-07-2013                    #
+#	Created For X-Cart                      				   #
+#                                                              #
+#	CardGatePlus Library class								   #
+#                                                              #
 ############################# End ############################
 
 class cgp_generic {
@@ -50,6 +50,7 @@ class cgp_generic {
     var $logToFile;
     var $returnData;
     var $_url;
+    private $link;
     private $pmType;
     private $version;
     private $testMode;
@@ -77,16 +78,23 @@ class cgp_generic {
 
     function __construct( $pm_type ) {
         global $sql_tbl;
+        global  $sql_host;
+        global $sql_user;
+        global $sql_password;
+        global $sql_db;
+       
+        $this->link  = mysqli_connect($sql_host,$sql_user,$sql_password,$sql_db);
 
         $isValidPm = $this->checkPmType( $pm_type );
         if ( !$isValidPm ) {
             die( 'Illegal payment type' );
         }
 
-        $processor = mysql_real_escape_string( 'cc_cgp_' . $pm_type . '.php' );
+        
+        $processor = mysqli_real_escape_string( $this->link, 'cc_cgp_' . $pm_type . '.php' );
         $query = sprintf( "SELECT * FROM " . $sql_tbl['ccprocessors'] . " WHERE processor = '%s' LIMIT 1", $processor );
-        $result = mysql_query( $query );
-        $s = mysql_fetch_assoc( $result );
+        $result = mysqli_query( $this->link, $query );
+        $s = mysqli_fetch_assoc( $result );
         $this->version = $s['param01'];
         $this->testMode = $s['param02'];
         $this->siteId = $s['param03'];
@@ -158,14 +166,15 @@ class cgp_generic {
         $this->doLogging( sprintf( "Getback: %s", serialize( $_POST ) ) );
 
         $orderID = $this->returnData->ref;
-
+        
         //Get OrderID as integer
-        $secureOrderID = func_query_first_cell( "select trstat from $sql_tbl[cc_pp3_data] where ref='" . clean( $orderID ) . "'" );
+        $secureOrderID = func_query_first_cell( "select trstat from $sql_tbl[cc_pp3_data] where ref='" . $this->clean( $orderID ) . "'" );
         $secureOrderID = split( '\|', $secureOrderID, 2 );
+        $n = $this->clean( $orderID );
         $secureOrderID = $secureOrderID[1];
         $query = sprintf( "SELECT * FROM $sql_tbl[orders] WHERE orderid=%d", $secureOrderID );
-        $result = mysql_query( $query );
-        $a = mysql_fetch_assoc( $result );
+        $result = mysqli_query( $this->link, $query );
+        $a = mysqli_fetch_assoc( $result );
         $hashString = ($this->testMode == 'Y' ? 'TEST' : '') .
                 $this->returnData->transactionID .
                 $this->currency .
@@ -173,7 +182,7 @@ class cgp_generic {
                 $a['orderid'] .
                 $this->returnData->status .
                 $this->hashKey;
-
+                
         if ( md5( $hashString ) == $this->returnData->hash ) {
             return true;
         } else {
@@ -185,8 +194,8 @@ class cgp_generic {
         global $sql_tbl;
         $table = $sql_tbl[$tbl];
         $query = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = '$table' AND COLUMN_NAME = 'sessid'";
-        $result = mysql_query( $query );
-        $s = mysql_fetch_assoc( $result );
+        $result = mysqli_query( $this->link, $query );
+        $s = mysqli_fetch_assoc( $result );
 
         if ( isset( $s['COLUMN_NAME'] ) ) {
             $sessionName = 'sessid';
@@ -340,8 +349,8 @@ class cgp_generic {
 
         // Update session status and order data
         $query = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = '$sql_tbl[cc_pp3_data]' AND COLUMN_NAME = 'sessid'";
-        $result = mysql_query( $query );
-        $s = mysql_fetch_assoc( $result );
+        $result = mysqli_query( $this->link, $query );
+        $s = mysqli_fetch_assoc( $result );
 
         if ( isset( $s['COLUMN_NAME'] ) ) {
             $sessionName = 'sessid';
@@ -372,12 +381,12 @@ class cgp_generic {
 
     function getShopVersion() {
         global $sql_tbl;
-        $res = mysql_query( "SELECT value FROM $sql_tbl[config] WHERE name='version'" );
-        if ( mysql_num_rows( $res ) < 1 ) {
+        $res = mysqli_query( $this->link, "SELECT value FROM $sql_tbl[config] WHERE name='version'" );
+        if ( mysqli_num_rows( $res ) < 1 ) {
             $xcart_db_version = "<= 2.4.1";
         } else {
-            for ( $i = 0; $i < mysql_num_rows( $res ); $i++ ) {
-                list ($version) = mysql_fetch_row( $res );
+            for ( $i = 0; $i < mysqli_num_rows( $res ); $i++ ) {
+                list ($version) = mysqli_fetch_row( $res );
                 if ( $i != 0 )
                     $xcart_db_version .= ", ";
                 $xcart_db_version .= $version;
@@ -391,7 +400,7 @@ class cgp_generic {
         if ( get_magic_quotes_gpc() ) {
             $str = stripslashes( $str );
         }
-        return mysql_real_escape_string( ($str ) );
+        return mysqli_real_escape_string( $this->link, ($str ) );
     }
 
     function checkPmType( $pm_type ) {
@@ -436,11 +445,13 @@ class cgp_generic {
 
     protected function getBankOptions() {
         $url = 'https://secure.curopayments.net/cache/idealDirectoryCUROPayments.dat';
+        
         if ( !ini_get( 'allow_url_fopen' ) || !function_exists( 'file_get_contents' ) ) {
             $result = false;
         } else {
             $result = file_get_contents( $url );
         }
+        
         if ( $result ) {
             $aBanks = unserialize( $result );
             $aBanks[0] = '-Maak uw keuze a.u.b.-';
@@ -491,6 +502,18 @@ class cgp_generic {
             $total += $tax['tax_value_precise'];
         }
         return $total;
+    }
+    
+    function getSessionName($tbl){
+        $query = sprintf("SELECT * FROM INFORMATION_SCHEMA.COLUMNS  WHERE TABLE_NAME = '%s' AND COLUMN_NAME = 'sessid'",$tbl);
+        $result = mysqli_query( $this->link, $query );
+        $s = mysqli_fetch_assoc( $result );
+        
+        if ( isset( $s['COLUMN_NAME'] ) ) {
+            return 'sessid';
+        } else {
+            return 'sessionid';
+        }
     }
 
 }

@@ -35,6 +35,21 @@ $files = array(
     "../include/templater/plugins/modifier.cgpgiftcarddetails.php"
 );
 
+$db_payment_templates = array();
+$db_payment_templates['ideal'] = 'cgp_ideal.tpl';
+$db_payment_templates['creditcard'] = 'offline.tpl';
+$db_payment_templates['directebanking'] = 'offline.tpl';
+$db_payment_templates['mistercash'] = 'offline.tpl';
+$db_payment_templates['paypal'] = 'offline.tpl';
+$db_payment_templates['giropay'] = 'offline.tpl';
+$db_payment_templates['afterpay'] = 'offline.tpl';
+$db_payment_templates['klarna'] = 'offline.tpl';
+$db_payment_templates['bitcoin'] = 'offline.tpl';
+$db_payment_templates['directdebit'] = 'offline.tpl';
+$db_payment_templates['banktransfer'] = 'offline.tpl';
+$db_payment_templates['przelewy24'] = 'offline.tpl';
+$db_payment_templates['giftcard'] = 'cgp_giftcard.tpl';
+
 $payment_names = array();
 $payment_names['creditcard'] = 'Credit Card';
 $payment_names['ideal'] = 'iDEAL';
@@ -66,17 +81,9 @@ $payment_templates['przelewy24'] = 'cgp_przelewy24.tpl';
 $payment_templates['giftcard'] = 'cgp_giftcard.tpl';
 
 function connectDatabase( $host, $user, $pass, $dbname ) {
-    if ( !mysql_connect( $host, $user, $pass ) ) {
-        return false;
-    } elseif ( !mysql_select_db( $dbname ) ) {
-        return false;
-    }
-
-    return true;
+    $link = mysqli_connect($host,$user,$pass,$dbname);
+    return $link;
 }
-
-;
-
 
 //Welcome message
 if ( ( int ) $current_step == 0 ) {
@@ -92,7 +99,8 @@ if ( ( int ) $current_step > 0 ) {
         $step["error"] = "X-Cart configuration file not found! Ensure you've uploaded the files in the correct directory.<br />";
     } else {
         include_once(XCART_CONFIG_FILE);
-        if ( !connectDatabase( $sql_host, $sql_user, $sql_password, $sql_db ) )
+        $link = connectDatabase( $sql_host, $sql_user, $sql_password, $sql_db );
+        if ( !$link )
             $step["error"] = "Could not connect to database.<br />";
     };
     if ( !isset( $smarty_skin_dir ) ) {
@@ -142,28 +150,35 @@ if ( ( int ) $current_step == 3 ) {
     foreach ( $payment_templates as $pm_method => $template ) {
 
         // Check if exists
-        $query = sprintf( "SELECT paymentid FROM %s WHERE payment_template LIKE '%%%s' LIMIT 1", mysql_real_escape_string( 'xcart_payment_methods' ), $template
+        $query = sprintf( "SELECT paymentid FROM %s WHERE processor_file = '%s' LIMIT 1", mysqli_real_escape_string($link, 'xcart_payment_methods' ), 'cc_cgp_'.$pm_method.'.php'
         );
-        $result = mysql_query( $query );
-        $pm_check = mysql_fetch_assoc( $result );
+        $result = mysqli_query($link, $query );
+        $pm_check = mysqli_fetch_assoc( $result );
 
         if ( !$pm_check['paymentid'] ) {
-            $query = sprintf( file_get_contents( "./database/payment_methods.sql" ), 'xcart_payment_methods', $payment_names[$pm_method], $pm_method );
-            $res = mysql_query( $query );
+            $query = sprintf( file_get_contents( "./database/payment_methods.sql" ), 'xcart_payment_methods', $payment_names[$pm_method], $db_payment_templates[$pm_method], $pm_method, $pm_method );
+            $res = mysqli_query( $link, $query );
             if ( !$res ) {
                 $step["error"] = "Could not update database table 'xcart_payment_methods'<br />";
             };
-            $pm_check['paymentid'] = mysql_insert_id();
-        };
+            $pm_check['paymentid'] = mysqli_insert_id($link);
+        } else {
+            // update old parameter
+            $query = sprintf( "UPDATE %s SET payment_template ='%s' WHERE paymentid=%s LIMIT 1", mysqli_real_escape_string( $link, 'xcart_payment_methods' ), 'customer/main/payment_'.$db_payment_templates[$pm_method],  $pm_check['paymentid']);
+            $res = mysqli_query( $link, $query );
+            if ( !$res ) {
+                $step["error"] = "Could not update database table 'xcart_payment_methods'<br />";
+            };
+        }
 
         if ( !$pm_check['paymentid'] ) {
             $step["error"] .= "Unable to update database<br />";
         } else {
             // Check if exists
-            $query = sprintf( "SELECT paymentid FROM %s WHERE processor LIKE '%s' LIMIT 1", mysql_real_escape_string( 'xcart_ccprocessors' ), 'cc_cgp_' . $pm_method . '.php'
+            $query = sprintf( "SELECT paymentid FROM %s WHERE processor LIKE '%s' LIMIT 1", mysqli_real_escape_string( $link, 'xcart_ccprocessors' ), 'cc_cgp_' . $pm_method . '.php'
             );
-            $result = mysql_query( $query );
-            $processor_check = mysql_fetch_assoc( $result );
+            $result = mysqli_query( $link, $query );
+            $processor_check = mysqli_fetch_assoc( $result );
             if ( !$processor_check['paymentid'] ) {
                 if ( $pm_method == 'creditcard' ) {
                     $test_mode = 'Y';
@@ -171,22 +186,24 @@ if ( ( int ) $current_step == 3 ) {
                     $test_mode = 'N';
                 }
                 $query = sprintf( file_get_contents( "./database/ccprocessors_4_1.sql" ), 'xcart_ccprocessors', $payment_names[$pm_method], $pm_method, CARDGATEPLUS_PLUGIN_VERSION, $test_mode, $pm_check['paymentid'] );
-                $res = mysql_query( $query );
+                $res = mysqli_query( $link, $query );
                 if ( !$res ) {
                     $step["error"] = "Could not update database table 'xcart_ccprocessors'<br />";
                 };
             } else {
-                $query = sprintf( "UPDATE %s SET param01 ='%s' WHERE paymentid=%s LIMIT 1", mysql_real_escape_string( 'xcart_ccprocessors' ), CARDGATEPLUS_PLUGIN_VERSION, $processor_check['paymentid']
+                $query = sprintf( "UPDATE %s SET param01 ='%s' WHERE paymentid=%s LIMIT 1", mysqli_real_escape_string( $link, 'xcart_ccprocessors' ), CARDGATEPLUS_PLUGIN_VERSION, $processor_check['paymentid']
                 );
-                $res = mysql_query( $query );
-                $processor_check = mysql_fetch_assoc( $res );
+                $res = mysqli_query( $link, $query );
+                $processor_check = mysqli_fetch_assoc( $res );
                 if ( !$res ) {
                     $step["error"] = "Could not update database table 'xcart_ccprocessors'<br />";
                 };
-            }
+            };
         };
     };
 };
+
+$link = 0;
 
 if ( $step["error"] )
     $step["status"] = "error";
