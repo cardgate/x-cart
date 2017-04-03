@@ -63,7 +63,7 @@ if ( $cardgateplus->onCallback() ) {
   
 //Get OrderID as integer
     $secureOrderID = func_query_first_cell( "select trstat from $sql_tbl[cc_pp3_data] where ref='" . $cardgateplus->clean( $orderID ) . "'" );
-    $secureOrderID = split( '\|', $secureOrderID, 2 );
+    $secureOrderID = explode("|", $secureOrderID, 2 );
     $secureOrderID = $secureOrderID[1];
     
 //Get current order status

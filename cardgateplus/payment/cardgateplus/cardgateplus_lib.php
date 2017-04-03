@@ -169,7 +169,7 @@ class cgp_generic {
         
         //Get OrderID as integer
         $secureOrderID = func_query_first_cell( "select trstat from $sql_tbl[cc_pp3_data] where ref='" . $this->clean( $orderID ) . "'" );
-        $secureOrderID = split( '\|', $secureOrderID, 2 );
+        $secureOrderID = explode("|",$secureOrderID,2);
         $n = $this->clean( $orderID );
         $secureOrderID = $secureOrderID[1];
         $query = sprintf( "SELECT * FROM $sql_tbl[orders] WHERE orderid=%d", $secureOrderID );
