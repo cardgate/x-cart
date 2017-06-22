@@ -417,17 +417,7 @@ class cgp_generic {
             $aIssuers = $this->getBankOptions();
         } else {
             $aIssuers = array(
-                '0' => 'Choose your bank',
-                '0021' => 'Rabobank',
-                '0031' => 'ABN Amro',
-                '0091' => 'Friesland Bank',
-                '0721' => 'ING',
-                '0751' => 'SNS Bank',
-                '-' => '------ Additional Banks ------',
-                '0161' => 'Van Lanschot Bank',
-                '0511' => 'Triodos Bank',
-                '0761' => 'ASN Bank',
-                '0771' => 'SNS Regio Bank',
+                '0' => 'No bank options available',
             );
         }
 
