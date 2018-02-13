@@ -359,7 +359,7 @@ class cgp_generic {
         }
 
         db_query( "REPLACE INTO $sql_tbl[cc_pp3_data] (ref,$sessionName,trstat,param3) VALUES ('" . addslashes( $order_id ) . "','" . $XCARTSESSID . "','CGP|" . implode( '|', $secure_oid ) . "','" . $this->clean( $this->statusCode['NEW'] ) . "')" );
-
+        
         //Redirect
         func_create_payment_form( $this->_url, $fields, 'Order Form' );
         exit;
@@ -479,6 +479,7 @@ class cgp_generic {
     }
 
     function getUrl() {
+    	
         if ( $this->testMode == 'Y' ) {
             return "https://secure-staging.curopayments.net/gateway/cardgate/";
         } else {

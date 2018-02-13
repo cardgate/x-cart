@@ -70,7 +70,7 @@ if ( $cardgateplus->onCallback() ) {
     $currentStatus = func_query_first_cell( "select param3 from $sql_tbl[cc_pp3_data] where ref='" . $cardgateplus->clean( $orderID ) . "'" );
 
 // get processed status
-    $processedStatus = func_query_first_cell( "select param9 from $sql_tbl[cc_pp3_data] where ref='" . $cardgateplus->clean( $orderID ) . "'" );
+    $processedStatus = func_query_first_cell( "select status from $sql_tbl[orders] where orderid='" . $cardgateplus->clean( $orderID ) . "'" );
     
     $newStatus = $cardgateplus->returnData->status_id;
     
@@ -102,8 +102,8 @@ if ( $cardgateplus->onCallback() ) {
         };
     };
   
-//process while cardgate status is not 200
-    if ( $processedStatus != 200 ) {
+//process while order is not processed
+    if ( $processedStatus != 'P' ) {
       
 // Update session status and order data
         
@@ -114,7 +114,7 @@ if ( $cardgateplus->onCallback() ) {
         $bill_output["billmes"] = "CardGatePlus Status: " . $cardgateplus->returnData->status;
         
 // Update status
-        db_query( "UPDATE $sql_tbl[cc_pp3_data] SET param3 = '" . $status . "' WHERE ref='" . $cardgateplus->clean( $orderID ) . "' LIMIT 1" );
+     //   db_query( "UPDATE $sql_tbl[cc_pp3_data] SET param3 = '" . $status . "' WHERE ref='" . $cardgateplus->clean( $orderID ) . "' LIMIT 1" );
 
 // Update payment method
         db_query( "UPDATE $sql_tbl[orders] SET payment_method = 'CardGatePlus: " . $cardgateplus->returnData->pmType . "' WHERE orderid='" . $cardgateplus->clean( $secureOrderID ) . "' LIMIT 1" );
@@ -130,7 +130,7 @@ if ( $cardgateplus->onCallback() ) {
         $skey = $orderID;
         require $xcart_dir . '/payment/payment_ccmid.php';
         
-        db_query( "UPDATE $sql_tbl[cc_pp3_data] SET param9 = '" . $cardgateplus->returnData->status . "' WHERE ref='" . $cardgateplus->clean( $orderID ) . "' LIMIT 1" );
+      //  db_query( "UPDATE $sql_tbl[cc_pp3_data] SET param9 = '" . $cardgateplus->returnData->status . "' WHERE ref='" . $cardgateplus->clean( $orderID ) . "' LIMIT 1" );
         
     }
     echo $cardgateplus->returnData->transactionID . '.' . $cardgateplus->returnData->status;

@@ -42,8 +42,9 @@
 #                                                               #
 ############################# End ############################
 // Check checksum data
-if ( $cardgateplus->OnPage() ) {
 
+if ( $cardgateplus->OnPage() ) {
+	
     // Convert Reference to Order
     $skey = $_GET['o'];
 
@@ -63,6 +64,7 @@ if ( $cardgateplus->OnPage() ) {
     if ( $_GET['status'] == 'success' ) {
         x_session_unregister( 'cart', $unset_global = false );
     }
+    
     // Show page with Error message or Invoice depending on Status
     require($xcart_dir . "/payment/payment_ccview.php");
 } else {
