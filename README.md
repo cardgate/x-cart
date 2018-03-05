@@ -17,7 +17,7 @@ Please visit [My Cardgate](https://my.cardgate.com/) and retrieve your Site ID a
 
 ## Installation
 
-1. Download the cardgate.zip file on your desktop.
+1. Download and unzip the cardgateplus.zip file on your desktop.
 
 2. Upload the **install_cardgateplus, include** and **payment** folders to the **root** folder of your webshop.
 
