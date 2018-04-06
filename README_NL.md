@@ -2,10 +2,6 @@
 
 # CardGate module voor X-Cart
 
-[![Total Downloads](https://img.shields.io/packagist/dt/cardgate/x-cart.svg)](https://packagist.org/packages/cardgate/x-cart)
-[![Latest Version](https://img.shields.io/packagist/v/cardgate/x-cart.svg)](https://github.com/cardgate/x-cart/releases)
-[![Build Status](https://travis-ci.org/cardgate/x-cart.svg?branch=master)](https://travis-ci.org/cardgate/x-cart)
-
 ## Support
 
 Deze module is geschikt voor X-Cart **4.4.0** tot **4.7.x** .
