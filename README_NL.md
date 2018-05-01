@@ -10,12 +10,12 @@ Deze module is geschikt voor X-Cart **4.4.0** tot **4.7.x** .
 
 Voor het gebruik van deze module zijn CardGate inloggegevens noodzakelijk.
 
-Ga a.u.b. naar [Mijn CardGate](https://my.cardgate.com/) en kopieer de  Site Id en Codeersleutel,  
+Ga a.u.b. naar [Mijn CardGate](https://my.cardgate.com/) en kopieer de  site Id en hash key,  
 of vraag deze gegevens aan uw accountmanager.
 
 ## Installatie
 
-1. Download en unzip het **cardgateplus.zip** bestand op je bureaublad.
+1. Download en unzip de meest recente [source code](https://github.com/cardgate/x-cart/releases/) op je bureaublad.
 
 2. Upload de **install_cardgateplus, include** en **payment** mappen naar de **root** map van je webshop.
 
@@ -32,7 +32,7 @@ of vraag deze gegevens aan uw accountmanager.
 
 3. Klik op de **Configure** link van de **betaalmethode** die je wenst te activeren.
 
-4. Vul hier de **Site Id** en de **Hash key (Codeersleutel)** in, deze kun je vinden bij **Sites** op [Mijn CardGate](https://my.cardgate.com/).
+4. Vul hier de **site Id** en de **hash key** in, deze kun je vinden bij **Sites** op [Mijn CardGate](https://my.cardgate.com/).
 
 5. Selecteer de **valuta** die je wenst te gebruiken.
 
@@ -55,7 +55,7 @@ of vraag deze gegevens aan uw accountmanager.
 13. Vul bij **Technische koppeling** de **Callback URL** in:  
     De Callback URL wordt in iedere betaalmodule getoond en kan direct gekopieerd worden.  
     
-14. Indien je voor meerdere betaalmethoden **dezelfde** Site Id en Hash key gebruikt,  
+14. Indien je voor meerdere betaalmethoden **dezelfde** site ID en hash key gebruikt,  
     kan je de Callback URL gebruiken van een **willekeurige** CardGate betaalmethode, zolang hij maar actief is.  
     Deze Callback zal ook de Callbacks naar andere CardGate betaalmethoden op de juiste manier verwerken.  
 
