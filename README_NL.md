@@ -10,7 +10,7 @@ Deze module is geschikt voor X-Cart **4.4.0** tot **4.7.x** .
 
 Voor het gebruik van deze module zijn CardGate inloggegevens noodzakelijk.
 
-Ga a.u.b. naar [Mijn CardGate](https://my.cardgate.com/) en kopieer de  site Id en hash key,  
+Ga a.u.b. naar [Mijn CardGate](https://my.cardgate.com/) en kopieer de  site ID en hash key,  
 of vraag deze gegevens aan uw accountmanager.
 
 ## Installatie
@@ -32,7 +32,7 @@ of vraag deze gegevens aan uw accountmanager.
 
 3. Klik op de **Configure** link van de **betaalmethode** die je wenst te activeren.
 
-4. Vul hier de **site Id** en de **hash key** in, deze kun je vinden bij **Sites** op [Mijn CardGate](https://my.cardgate.com/).
+4. Vul hier de **site ID** en de **hash key** in, deze kun je vinden bij **Sites** op [Mijn CardGate](https://my.cardgate.com/).
 
 5. Selecteer de **valuta** die je wenst te gebruiken.
 
