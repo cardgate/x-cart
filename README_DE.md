@@ -15,7 +15,7 @@ Gehen Sie zu [**Mein CardGate**](https://my.cardgate.com/) und fragen Sie Ihre *
 
 1. Downloaden und entpacken Sie den aktuellsten [**Source Code**](https://github.com/cardgate/x-cart/releases) auf Ihrem Desktop.
 
-2. Uploaden Sie den **install_cardgateplus-Ordner**, den **include-Ordener* und den **payment-Ordner** in den **root-Ordner** Ihres Webshops. 
+2. Uploaden Sie den **install_cardgateplus-Ordner**, den **include-Ordener** und den **payment-Ordner** in den **root-Ordner** Ihres Webshops. 
 
 3. Öffnen Sie **http://meinwebshop.com/install_cardgateplus** in Ihrem Browser und installieren Sie das Plugin.    
    (Tauschen Sie **http://meinwebshop.com** mit der URL Ihres Webshops aus.)
