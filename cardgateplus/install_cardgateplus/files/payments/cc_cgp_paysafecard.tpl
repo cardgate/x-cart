@@ -1,8 +1,8 @@
 {*
-$Id: cc_cgp_paypal.tpl,v 0.1 2008/08/21 09:53:14 max Exp $
+$Id: cc_cgp_paysafecard.tpl,v 0.1 2008/08/21 09:53:14 max Exp $
 vim: set ts=2 sw=2 sts=2 et:
 *}
-<h3>CardGatePlus PayPal</h3>
+<h3>CardGatePlus Paysafecard</h3>
 {$lng.txt_cc_configure_top_text}
 <p />
 {capture name=dialog}
@@ -16,7 +16,7 @@ vim: set ts=2 sw=2 sts=2 et:
 </tr>
 <tr>
 	<td>Control URL:</td>
-	<td>{$http_location}/payment/cc_cgp_paypal.php</td>
+	<td>{$http_location}/payment/cc_cgp_paysafecard.php</td>
 </tr>
 <tr>
 	<td>Mode</td>

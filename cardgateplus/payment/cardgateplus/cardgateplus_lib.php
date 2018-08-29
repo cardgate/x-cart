@@ -61,19 +61,20 @@ class cgp_generic {
     private $prefix;
     private $language;
     protected $pm_types = array(
+        'afterpay',
+        'banktransfer',
+        'bitcoin',
         'creditcard',
         'directebanking',
+        'directdebit',
+        'giftcard',
         'giropay',
         'ideal',
+        'klarna',
         'mistercash',
         'paypal',
-        'directdebit',
-        'banktransfer',
-        'afterpay',
-        'bitcoin',
-        'klarna',
-        'przelewy24',
-        'giftcard'
+        'paysafecard',
+        'przelewy24'
     );
 
     function __construct( $pm_type ) {
