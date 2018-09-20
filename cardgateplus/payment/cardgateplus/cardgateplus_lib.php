@@ -63,6 +63,7 @@ class cgp_generic {
     protected $pm_types = array(
         'afterpay',
         'banktransfer',
+        'billink',
         'bitcoin',
         'creditcard',
         'directebanking',
