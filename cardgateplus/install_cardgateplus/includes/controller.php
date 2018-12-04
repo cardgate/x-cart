@@ -22,6 +22,7 @@ $files = array(
     "../payment/cc_cgp_paypal.php",
     "../payment/cc_cgp_paysafecard.php",
     "../payment/cc_cgp_giropay.php",
+    "../payment/cc_cgp_idealqr.php",
     "../payment/cc_cgp_afterpay.php",
     "../payment/cc_cgp_klarna.php",
     "../payment/cc_cgp_billink.php",
@@ -45,6 +46,7 @@ $db_payment_templates['mistercash'] = 'offline.tpl';
 $db_payment_templates['paypal'] = 'offline.tpl';
 $db_payment_templates['paysafecard'] = 'offline.tpl';
 $db_payment_templates['giropay'] = 'offline.tpl';
+$db_payment_templates['idealqr'] = 'offline.tpl';
 $db_payment_templates['afterpay'] = 'offline.tpl';
 $db_payment_templates['klarna'] = 'offline.tpl';
 $db_payment_templates['billink'] = 'offline.tpl';
@@ -62,6 +64,7 @@ $payment_names['mistercash'] = 'MisterCash';
 $payment_names['paypal'] = 'PayPal';
 $payment_names['paysafecard'] = 'Paysafecard';
 $payment_names['giropay'] = 'Giropay';
+$payment_names['idealqr'] = 'iDEAL QR';
 $payment_names['afterpay'] = 'Afterpay';
 $payment_names['billink'] = 'Billink';
 $payment_names['bitcoin'] = 'Bitcoin';
@@ -79,6 +82,7 @@ $payment_templates['mistercash'] = 'cgp_mistercash.tpl';
 $payment_templates['paypal'] = 'cgp_paypal.tpl';
 $payment_templates['paysafecard'] = 'cgp_paysafecard.tpl';
 $payment_templates['giropay'] = 'cgp_giropay.tpl';
+$payment_templates['idealqr'] = 'cgp_idealqr.tpl';
 $payment_templates['afterpay'] = 'cgp_afterpay.tpl';
 $payment_templates['klarna'] = 'cgp_klarna.tpl';
 $payment_templates['billink'] = 'cgp_billink.tpl';

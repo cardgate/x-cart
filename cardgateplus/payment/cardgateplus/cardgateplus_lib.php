@@ -71,6 +71,7 @@ class cgp_generic {
         'giftcard',
         'giropay',
         'ideal',
+        'idealqr',
         'klarna',
         'mistercash',
         'paypal',
