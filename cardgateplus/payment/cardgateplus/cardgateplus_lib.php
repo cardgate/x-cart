@@ -66,8 +66,8 @@ class cgp_generic {
         'billink',
         'bitcoin',
         'creditcard',
-        'directebanking',
         'directdebit',
+        'directebanking',
         'giftcard',
         'giropay',
         'ideal',
@@ -76,6 +76,7 @@ class cgp_generic {
         'mistercash',
         'paypal',
         'paysafecard',
+        'paysafecash',
         'przelewy24'
     );
 
