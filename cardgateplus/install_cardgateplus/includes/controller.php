@@ -15,19 +15,22 @@ if ( isset( $_GET["cs"] ) ) {
     $current_step = 0;
 };
 $files = array(
+    "../payment/cc_cgp_afterpay.php",
+    "../payment/cc_cgp_banktransfer.php",
+    "../payment/cc_cgp_billink.php",
+    "../payment/cc_cgp_bitcoin.php",
     "../payment/cc_cgp_creditcard.php",
-    "../payment/cc_cgp_ideal.php",
+    "../payment/cc_cgp_directdebit.php",
     "../payment/cc_cgp_directebanking.php",
+    "../payment/cc_cgp_giftcard.php",
+    "../payment/cc_cgp_giropay.php",
+    "../payment/cc_cgp_ideal.php",
+    "../payment/cc_cgp_idealqr.php",
+    "../payment/cc_cgp_klarna.php",
     "../payment/cc_cgp_mistercash.php",
     "../payment/cc_cgp_paypal.php",
     "../payment/cc_cgp_paysafecard.php",
-    "../payment/cc_cgp_giropay.php",
-    "../payment/cc_cgp_afterpay.php",
-    "../payment/cc_cgp_klarna.php",
-    "../payment/cc_cgp_billink.php",
-    "../payment/cc_cgp_bitcoin.php",
-    "../payment/cc_cgp_directdebit.php",
-    "../payment/cc_cgp_banktransfer.php",
+    "../payment/cc_cgp_paysafecash.php",
     "../payment/cc_cgp_przelewy24.php",
     "../payment/cgp_notify.php",
     "../payment/cardgateplus/cardgateplus_lib.php",
@@ -38,55 +41,63 @@ $files = array(
 );
 
 $db_payment_templates = array();
-$db_payment_templates['ideal'] = 'cgp_ideal.tpl';
+$db_payment_templates['afterpay'] = 'offline.tpl';
+$db_payment_templates['banktransfer'] = 'offline.tpl';
+$db_payment_templates['billink'] = 'offline.tpl';
+$db_payment_templates['bitcoin'] = 'offline.tpl';
 $db_payment_templates['creditcard'] = 'offline.tpl';
+$db_payment_templates['directdebit'] = 'offline.tpl';
 $db_payment_templates['directebanking'] = 'offline.tpl';
+$db_payment_templates['giftcard'] = 'offline.tpl';
+$db_payment_templates['giropay'] = 'offline.tpl';
+$db_payment_templates['ideal'] = 'cgp_ideal.tpl';
+$db_payment_templates['idealqr'] = 'offline.tpl';
+$db_payment_templates['klarna'] = 'offline.tpl';
 $db_payment_templates['mistercash'] = 'offline.tpl';
 $db_payment_templates['paypal'] = 'offline.tpl';
 $db_payment_templates['paysafecard'] = 'offline.tpl';
-$db_payment_templates['giropay'] = 'offline.tpl';
-$db_payment_templates['afterpay'] = 'offline.tpl';
-$db_payment_templates['klarna'] = 'offline.tpl';
-$db_payment_templates['billink'] = 'offline.tpl';
-$db_payment_templates['bitcoin'] = 'offline.tpl';
-$db_payment_templates['directdebit'] = 'offline.tpl';
-$db_payment_templates['banktransfer'] = 'offline.tpl';
+$db_payment_templates['paysafecash'] = 'offline.tpl';
 $db_payment_templates['przelewy24'] = 'offline.tpl';
-$db_payment_templates['giftcard'] = 'cgp_giftcard.tpl';
+
 
 $payment_names = array();
+$payment_names['afterpay'] = 'Afterpay';
+$payment_names['banktransfer'] = 'Bank Transfer';
+$payment_names['billink'] = 'Billink';
+$payment_names['bitcoin'] = 'Bitcoin';
 $payment_names['creditcard'] = 'Credit Card';
-$payment_names['ideal'] = 'iDEAL';
+$payment_names['directdebit'] = 'Direct Debit';
 $payment_names['directebanking'] = 'DIRECTebanking';
+$payment_names['giftcard'] = 'Gift Card';
+$payment_names['giropay'] = 'Giropay';
+$payment_names['ideal'] = 'iDEAL';
+$payment_names['idealqr'] = 'iDEAL QR';
+$payment_names['klarna'] = 'Klarna';
 $payment_names['mistercash'] = 'MisterCash';
 $payment_names['paypal'] = 'PayPal';
 $payment_names['paysafecard'] = 'Paysafecard';
-$payment_names['giropay'] = 'Giropay';
-$payment_names['afterpay'] = 'Afterpay';
-$payment_names['billink'] = 'Billink';
-$payment_names['bitcoin'] = 'Bitcoin';
-$payment_names['klarna'] = 'Klarna';
-$payment_names['directdebit'] = 'Direct Debit';
-$payment_names['banktransfer'] = 'Bank Transfer';
+$payment_names['paysafecash'] = 'Paysafecash';
 $payment_names['przelewy24'] = 'Przelewy24';
-$payment_names['giftcard'] = 'Giftcard';
 
 $payment_templates = array();
-$payment_templates['ideal'] = 'cgp_ideal.tpl';
+$payment_templates['afterpay'] = 'cgp_afterpay.tpl';
+$payment_templates['banktransfer'] = 'cgp_banktransfer.tpl';
+$payment_templates['billink'] = 'cgp_billink.tpl';
+$payment_templates['bitcoin'] = 'cgp_bitcoin.tpl';
 $payment_templates['creditcard'] = 'cgp_creditcard.tpl';
+$payment_templates['directdebit'] = 'cgp_directdebit.tpl';
 $payment_templates['directebanking'] = 'cgp_directebanking.tpl';
+$payment_templates['giftcard'] = 'cgp_giftcard.tpl';
+$payment_templates['giropay'] = 'cgp_giropay.tpl';
+$payment_templates['ideal'] = 'cgp_ideal.tpl';
+$payment_templates['idealqr'] = 'cgp_idealqr.tpl';
+$payment_templates['klarna'] = 'cgp_klarna.tpl';
 $payment_templates['mistercash'] = 'cgp_mistercash.tpl';
 $payment_templates['paypal'] = 'cgp_paypal.tpl';
 $payment_templates['paysafecard'] = 'cgp_paysafecard.tpl';
-$payment_templates['giropay'] = 'cgp_giropay.tpl';
-$payment_templates['afterpay'] = 'cgp_afterpay.tpl';
-$payment_templates['klarna'] = 'cgp_klarna.tpl';
-$payment_templates['billink'] = 'cgp_billink.tpl';
-$payment_templates['bitcoin'] = 'cgp_bitcoin.tpl';
-$payment_templates['directdebit'] = 'cgp_directdebit.tpl';
-$payment_templates['banktransfer'] = 'cgp_banktransfer.tpl';
+$payment_templates['paysafecash'] = 'cgp_paysafecash.tpl';
 $payment_templates['przelewy24'] = 'cgp_przelewy24.tpl';
-$payment_templates['giftcard'] = 'cgp_giftcard.tpl';
+
 
 function connectDatabase( $host, $user, $pass, $dbname ) {
     $link = mysqli_connect($host,$user,$pass,$dbname);
