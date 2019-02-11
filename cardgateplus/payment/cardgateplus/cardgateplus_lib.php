@@ -63,17 +63,20 @@ class cgp_generic {
     protected $pm_types = array(
         'afterpay',
         'banktransfer',
+        'billink',
         'bitcoin',
         'creditcard',
-        'directebanking',
         'directdebit',
+        'directebanking',
         'giftcard',
         'giropay',
         'ideal',
+        'idealqr',
         'klarna',
         'mistercash',
         'paypal',
         'paysafecard',
+        'paysafecash',
         'przelewy24'
     );
 
