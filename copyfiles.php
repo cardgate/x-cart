@@ -219,12 +219,5 @@ foreach ( $data as $k => $v ) {
 
 // make the zip
 echo 'files copied<br>';
-
-// Get real path for our folder
-$rootPath = '/home/richard/websites/xcart/htdocs/_plugin/cardgateplus';
-$filename = 'cardgateplus.zip';
-
-zipfiles($filename, $rootPath);
-echo 'zipfile made<br>';
 echo 'done!';
 ?>
