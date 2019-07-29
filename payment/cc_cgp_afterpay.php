@@ -68,9 +68,9 @@ if ( $REQUEST_METHOD == "POST" && (isset( $_POST['action'] ) && $_POST['action']
     $cardgateplus->redirect();
 } elseif ( $REQUEST_METHOD == 'POST' && isset( $_POST['transaction_id'] ) ) {
     // process callback
-    include_once("./cardgateplus/getback.php");
+    include_once( "./cardgateplus/getback.php" );
 } elseif ( isset( $_GET['action'] ) && $_GET['action'] == 'return' ) {
     // Result page (Error or Success)    
-    include_once("./cardgateplus/result.php");
+    include_once( "./cardgateplus/result.php" );
 }
 ?>

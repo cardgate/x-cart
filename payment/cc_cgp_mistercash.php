@@ -49,15 +49,15 @@
 	// Load CardGatePlus library class
 	require_once "./cardgateplus/cardgateplus_lib.php";
 	
-	class cgp_giftcard extends cgp_generic {
+	class cgp_mistercash extends cgp_generic {
 	}
 	
-	$cardgateplus = new cgp_giftcard('giftcard');
+	$cardgateplus = new cgp_mistercash('mistercash');
 	
 	// Exit if the CardGatePlus Payment method is not activated.
-	if (!func_is_active_payment("cc_cgp_giftcard.php"))
+	if (!func_is_active_payment("cc_cgp_mistercash.php"))
 		die("Payment Method not activated");
-
+	
 	if (!isset($REQUEST_METHOD))
         $REQUEST_METHOD = $_SERVER["REQUEST_METHOD"];
 	
@@ -67,9 +67,9 @@
 		$cardgateplus->redirect();
 	} elseif ($REQUEST_METHOD == 'POST' && isset($_POST['transaction_id'])){
 		// process callback
-		include_once("./cardgateplus/getback.php");
+		include_once( "./cardgateplus/getback.php" );
 	} elseif (isset($_GET['action']) && $_GET['action'] == 'return'){
 		// Result page (Error or Success)    
-    		include_once("./cardgateplus/result.php");
+    		include_once( "./cardgateplus/result.php" );
 	}
 ?>

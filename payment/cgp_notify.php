@@ -42,6 +42,6 @@
 		if (!func_is_active_payment("cc_cgp_".$pm_method.".php"))
 			die("Payment Method not activated");
 		// process callback
-		include_once("./cardgateplus/getback.php");
+		include_once( "./cardgateplus/getback.php" );
 	} 
 ?>
