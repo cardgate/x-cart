@@ -26,6 +26,7 @@ payment/*
 !payment/cc_cgp_klarna.php
 !payment/cc_cgp_przelewy24.php
 !payment/cgp_notify.php
+!copyfiles.php
 !README.md
 !README_DE.md
 !README_NL.md
