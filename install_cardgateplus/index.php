@@ -1,7 +1,7 @@
 <?php
 
-include_once("includes/configuration.php");
-include_once("includes/controller.php");
+include_once( "includes/configuration.php" );
+include_once( "includes/controller.php" );
 
 ?>
 
