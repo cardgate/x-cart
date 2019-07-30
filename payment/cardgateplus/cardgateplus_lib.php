@@ -467,7 +467,7 @@ class cgp_generic {
         $s = mysqli_fetch_assoc($result);
         $testMode = substr($s['value'], 0, 1);
         $refreshTime = substr($s['value'], 1);
-        
+
         if (($this->testMode<>$testMode) || ($refreshTime < time())){
             $this->refreshIssuers();
     }
@@ -499,14 +499,16 @@ class cgp_generic {
             $aBanks = unserialize( $result );
             $aBanks[0] = '-Maak uw keuze a.u.b.-';
         }
-        $sBanks = serialize($aBanks);
-        $query = sprintf("UPDATE ".$sql_tbl['config']." SET value='{$sBanks}' WHERE name='cardgate_issuers'");
-        $result = mysqli_query( $this->link, $query );
-        
-        $iIssuerRefresh = $this->testMode;
-        $iIssuerRefresh .= 24*60*60 + time();
-        $query = sprintf("UPDATE ".$sql_tbl['config']." SET value='{$iIssuerRefresh}' WHERE name='cardgate_issuer_refresh'");
-        $result = mysqli_query( $this->link, $query ); 
+
+        if (array_key_exists("INGBNL2A", $aBanks)) {
+            $sBanks = serialize($aBanks);
+            $query = sprintf("UPDATE ".$sql_tbl['config']." SET value='{$sBanks}' WHERE name='cardgate_issuers'");
+            $result = mysqli_query( $this->link, $query );
+            $iIssuerRefresh = $this->testMode;
+            $iIssuerRefresh .= 24 * 60 * 60 + time();
+            $query = sprintf( "UPDATE " . $sql_tbl['config'] . " SET value='{$iIssuerRefresh}' WHERE name='cardgate_issuer_refresh'" );
+            $result = mysqli_query( $this->link, $query );
+        }
     }
     
     protected function fetchIssuers(){
