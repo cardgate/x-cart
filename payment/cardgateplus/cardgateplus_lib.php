@@ -93,7 +93,8 @@ class cgp_generic {
         'paypal',
         'paysafecard',
         'paysafecash',
-        'przelewy24'
+        'przelewy24',
+        'onlineueberweisen'
     );
 
     function __construct($pm_type) {
