@@ -20,6 +20,7 @@ payment/*
 !payment/cc_cgp_ideal.php
 !payment/cc_cgp_giftcard.php
 !payment/cc_cgp_mistercash.php
+!payment/cc_cgp_onlineueberweisen.php
 !payment/cc_cgp_paypal.php
 !payment/cc_cgp_afterpay.php
 !payment/cc_cgp_bitcoin.php

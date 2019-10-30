@@ -28,6 +28,7 @@ $files = array(
     "../payment/cc_cgp_idealqr.php",
     "../payment/cc_cgp_klarna.php",
     "../payment/cc_cgp_mistercash.php",
+	"../payment/cc_cgp_onlineueberweisen.php",
     "../payment/cc_cgp_paypal.php",
     "../payment/cc_cgp_paysafecard.php",
     "../payment/cc_cgp_paysafecash.php",
@@ -54,6 +55,7 @@ $db_payment_templates['ideal'] = 'cgp_ideal.tpl';
 $db_payment_templates['idealqr'] = 'offline.tpl';
 $db_payment_templates['klarna'] = 'offline.tpl';
 $db_payment_templates['mistercash'] = 'offline.tpl';
+$db_payment_templates['onlineueberweisen'] = 'offline.tpl';
 $db_payment_templates['paypal'] = 'offline.tpl';
 $db_payment_templates['paysafecard'] = 'offline.tpl';
 $db_payment_templates['paysafecash'] = 'offline.tpl';
@@ -74,6 +76,7 @@ $payment_names['ideal'] = 'iDEAL';
 $payment_names['idealqr'] = 'iDEAL QR';
 $payment_names['klarna'] = 'Klarna';
 $payment_names['mistercash'] = 'MisterCash';
+$payment_names['onlineueberweisen'] = 'OnlineÜberweisen';
 $payment_names['paypal'] = 'PayPal';
 $payment_names['paysafecard'] = 'Paysafecard';
 $payment_names['paysafecash'] = 'Paysafecash';
@@ -93,6 +96,7 @@ $payment_templates['ideal'] = 'cgp_ideal.tpl';
 $payment_templates['idealqr'] = 'cgp_idealqr.tpl';
 $payment_templates['klarna'] = 'cgp_klarna.tpl';
 $payment_templates['mistercash'] = 'cgp_mistercash.tpl';
+$payment_templates['onlineueberweisen'] = 'cgp_onlineueberweisen.tpl';
 $payment_templates['paypal'] = 'cgp_paypal.tpl';
 $payment_templates['paysafecard'] = 'cgp_paysafecard.tpl';
 $payment_templates['paysafecash'] = 'cgp_paysafecash.tpl';

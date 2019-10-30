@@ -217,7 +217,6 @@ foreach ( $data as $k => $v ) {
         recurse_copy( $v['src'], $v['dst'], $v['isdir'] );
 }
 
-// make the zip
 echo 'files copied<br>';
 echo 'done!';
 ?>
