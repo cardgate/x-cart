@@ -1,0 +1,15 @@
+{
+  "name": "cardgate/x-cart",
+  "type": "library",
+  "description": "CardGate payment processing module for X-Cart",
+  "keywords": [
+    "x-cart",
+    "cardgate",
+    "payment"
+  ],
+  "homepage": "https://www.cardgate.com",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": { "Cardgate\\x-cart\\" : "" }
+  }
+}
