@@ -2,6 +2,8 @@
 
 # CardGate module für X-Cart
 
+[![Build Status](https://travis-ci.org/cardgate/x-cart.svg?branch=master)](https://travis-ci.org/cardgate/x-cart)
+
 ## Support
 
 Dieses Modul is geeignet für X-Cart Version **4.4.0** bis zum Version **4.7.x**
