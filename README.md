@@ -11,11 +11,11 @@ This plugin supports X-Cart **4.4.0** to **4.7.x**
 ## Preparation
 
 The usage of this module requires that you have obtained CardGate securitycredentials.  
-Please visit [**My CardGate**](https://my.cardgate.com/) and retrieve your Site Id and Hash key, or contact your accountmanager.
+Please visit [**My CardGate**](https://my.cardgate.com/) and retrieve your Site ID and Hash key, or contact your accountmanager.
 
 ## Installation
 
-1. Download and unzip the most recent [**source code**](https://github.com/cardgate/x-cart/releases) file on your desktop.
+1. Download and unzip the most recent [**cardgate.zip**](https://github.com/cardgate/x-cart/releases) file on your desktop.
 
 2. Upload the **install_cardgateplus, include** and **payment** folders to the **root** folder of your webshop.
 

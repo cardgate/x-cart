@@ -15,7 +15,7 @@ Gehen Sie zu [**Mein CardGate**](https://my.cardgate.com/) und fragen Sie Ihre *
 
 ## Installation
 
-1. Downloaden und entpacken Sie den aktuellsten [**Source Code**](https://github.com/cardgate/x-cart/releases) auf Ihrem Desktop.
+1. Downloaden und entpacken Sie den aktuellsten [**cardgate.zip**](https://github.com/cardgate/x-cart/releases) Datei auf Ihrem Desktop.
 
 2. Uploaden Sie den **install_cardgateplus-Ordner**, den **include-Ordener** und den **payment-Ordner** in den **root-Ordner** Ihres Webshops. 
 
@@ -50,7 +50,7 @@ Gehen Sie zu [**Mein CardGate**](https://my.cardgate.com/) und fragen Sie Ihre *
 
 11. Wiederholen Sie die Schritte **3 bis 10** für **jedes Zahlungsmittel**, dass Sie installieren möchten.
 
-12. Gehen Sie zu [**Mein CardGate**](https://my.cardgate.com/), klicken Sie auf **Webseite** und wählen Sie dir richtige Webseite aus.  
+12. Gehen Sie zu [**Mein CardGate**](https://my.cardgate.com/), klicken Sie auf **Webseite** und wählen Sie der richtige Webseite aus.  
 
 13. Füllen Sie bei Schnittstelle die **Callback URL** ein:  
     Die **Callback URL** wird in jeder Zahlungsmethode angezeigt und kann direkt kopiert werden.
