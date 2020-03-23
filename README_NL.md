@@ -17,7 +17,7 @@ of vraag deze gegevens aan uw accountmanager.
 
 ## Installatie
 
-1. Download en unzip het meest recente [**cardgate,zip**](https://github.com/cardgate/x-cart/releases/) bestand op je bureaublad.
+1. Download en unzip het meest recente [**cardgate.zip**](https://github.com/cardgate/x-cart/releases/) bestand op je bureaublad.
 
 2. Upload de **install_cardgateplus, include** en **payment** mappen naar de **root** map van je webshop.
 
