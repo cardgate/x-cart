@@ -122,7 +122,13 @@ if ( ( int ) $current_step > 0 ) {
         $step["error"] = "X-Cart configuration file not found! Ensure you've uploaded the files in the correct directory.<br />";
     } else {
         include_once(XCART_CONFIG_FILE);
-        $link = connectDatabase( $sql_host, $sql_user, $sql_password, $sql_db );
+	    if (strpos($sql_host, ':') !== false) {
+		    list($host, $port_socket) = explode(':', $sql_host);
+	    } else {
+		    $host = $sql_host;
+		    $port_socket = '';
+	    }
+	    $link = connectDatabase( $host, $sql_user, $sql_password, $sql_db );
         if ( !$link )
             $step["error"] = "Could not connect to database.<br />";
     };
