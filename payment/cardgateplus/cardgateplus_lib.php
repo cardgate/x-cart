@@ -103,8 +103,15 @@ class cgp_generic {
         global $sql_user;
         global $sql_password;
         global $sql_db;
+
+        if (strpos($sql_host, ':') !== false) {
+            list($host, $port_socket) = explode(':', $sql_host);
+        } else {
+            $host = $sql_host;
+            $port_socket = '';
+        }
         
-        $this->link = mysqli_connect($sql_host, $sql_user, $sql_password, $sql_db);
+        $this->link = mysqli_connect($host, $sql_user, $sql_password, $sql_db);
         
         $isValidPm = $this->checkPmType($pm_type);
         if (! $isValidPm) {
