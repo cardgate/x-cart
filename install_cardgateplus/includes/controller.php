@@ -33,6 +33,7 @@ $files = array(
     "../payment/cc_cgp_paysafecard.php",
     "../payment/cc_cgp_paysafecash.php",
     "../payment/cc_cgp_przelewy24.php",
+	"../payment/cc_cgp_spraypay.php",
     "../payment/cgp_notify.php",
     "../payment/cardgateplus/cardgateplus_lib.php",
     "../payment/cardgateplus/getback.php",
@@ -60,6 +61,7 @@ $db_payment_templates['paypal'] = 'offline.tpl';
 $db_payment_templates['paysafecard'] = 'offline.tpl';
 $db_payment_templates['paysafecash'] = 'offline.tpl';
 $db_payment_templates['przelewy24'] = 'offline.tpl';
+$db_payment_templates['spraypay'] = 'offline.tpl';
 
 
 $payment_names = array();
@@ -81,6 +83,7 @@ $payment_names['paypal'] = 'PayPal';
 $payment_names['paysafecard'] = 'Paysafecard';
 $payment_names['paysafecash'] = 'Paysafecash';
 $payment_names['przelewy24'] = 'Przelewy24';
+$payment_names['spraypay'] = 'SprayPay';
 
 $payment_templates = array();
 $payment_templates['afterpay'] = 'cgp_afterpay.tpl';
@@ -101,6 +104,7 @@ $payment_templates['paypal'] = 'cgp_paypal.tpl';
 $payment_templates['paysafecard'] = 'cgp_paysafecard.tpl';
 $payment_templates['paysafecash'] = 'cgp_paysafecash.tpl';
 $payment_templates['przelewy24'] = 'cgp_przelewy24.tpl';
+$payment_templates['spraypay'] = 'cgp_spraypay.tpl';
 
 
 function connectDatabase( $host, $user, $pass, $dbname ) {
