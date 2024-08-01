@@ -23,7 +23,6 @@ $files = array(
     "../payment/cc_cgp_directdebit.php",
     "../payment/cc_cgp_directebanking.php",
     "../payment/cc_cgp_giftcard.php",
-    "../payment/cc_cgp_giropay.php",
     "../payment/cc_cgp_ideal.php",
     "../payment/cc_cgp_idealqr.php",
     "../payment/cc_cgp_klarna.php",
@@ -51,7 +50,6 @@ $db_payment_templates['creditcard'] = 'offline.tpl';
 $db_payment_templates['directdebit'] = 'offline.tpl';
 $db_payment_templates['directebanking'] = 'offline.tpl';
 $db_payment_templates['giftcard'] = 'offline.tpl';
-$db_payment_templates['giropay'] = 'offline.tpl';
 $db_payment_templates['ideal'] = 'cgp_ideal.tpl';
 $db_payment_templates['idealqr'] = 'offline.tpl';
 $db_payment_templates['klarna'] = 'offline.tpl';
@@ -73,7 +71,6 @@ $payment_names['creditcard'] = 'Credit Card';
 $payment_names['directdebit'] = 'Direct Debit';
 $payment_names['directebanking'] = 'DIRECTebanking';
 $payment_names['giftcard'] = 'Gift Card';
-$payment_names['giropay'] = 'Giropay';
 $payment_names['ideal'] = 'iDEAL';
 $payment_names['idealqr'] = 'iDEAL QR';
 $payment_names['klarna'] = 'Klarna';
@@ -94,7 +91,6 @@ $payment_templates['creditcard'] = 'cgp_creditcard.tpl';
 $payment_templates['directdebit'] = 'cgp_directdebit.tpl';
 $payment_templates['directebanking'] = 'cgp_directebanking.tpl';
 $payment_templates['giftcard'] = 'cgp_giftcard.tpl';
-$payment_templates['giropay'] = 'cgp_giropay.tpl';
 $payment_templates['ideal'] = 'cgp_ideal.tpl';
 $payment_templates['idealqr'] = 'cgp_idealqr.tpl';
 $payment_templates['klarna'] = 'cgp_klarna.tpl';
