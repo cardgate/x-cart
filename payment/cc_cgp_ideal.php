@@ -53,7 +53,7 @@
 	}
 	
 	$cardgateplus = new cgp_ideal('ideal');
-	
+	print_r($cardgateplus);
 	// Exit if the CardGatePlus Payment method is not activated.
 	if (!func_is_active_payment("cc_cgp_ideal.php"))
 		die("Payment Method not activated");
