@@ -48,12 +48,16 @@ function smarty_modifier_cgpbanks($value)
 	require_once './payment/cardgateplus/cardgateplus_lib.php';
 	class cgp_ideal extends cgp_generic {
 	}
-	
+
 	$cardgateplus = new cgp_ideal('ideal');
-	$s  = $cardgateplus->generateBankHtml();
-	$s .= $cardgateplus->generateBankScript();
-	
-	return $s;
+	if ( $cardgateplus->showIssuers() == 'Y' ) {
+		$s  = $cardgateplus->generateBankHtml();
+		$s .= $cardgateplus->generateBankScript();
+		return $s;
+	} else {
+		return false;
+	}
+
 }
 
 ?>

@@ -21,10 +21,20 @@ vim: set ts=2 sw=2 sts=2 et:
 <tr>
 	<td>Mode</td>
 	<td>
-		<select name="param02">
-			<option value="Y"{if $module_data.param02 eq "Y"} selected="selected"{/if}>Test</option>
-			<option value="N"{if $module_data.param02 eq "N"} selected="selected"{/if}>Live</option>
+		<select name="testmode">
+			<option value="Y"{if $module_data.testmode eq "Y"} selected="selected"{/if}>Test</option>
+			<option value="N"{if $module_data.testmode eq "N"} selected="selected"{/if}>Live</option>
 		</select>
+	</td>
+</tr>
+<tr>
+	<td>Show Issuers</td>
+	<td>
+		<select name="param02">
+			<option value="N"{if $module_data.param02 eq "N"} selected="selected"{/if}>Without issuers</option>
+			<option value="Y"{if $module_data.param02 eq "Y"} selected="selected"{/if}>With issuers</option>
+		</select><br>
+		iDEAL v2 will not show issuers any more by default (Mandatory by iDEAL).
 	</td>
 </tr>
 <tr>
