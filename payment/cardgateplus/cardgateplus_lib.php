@@ -64,6 +64,8 @@ class cgp_generic {
 
     private $testMode;
 
+    protected $showIssuers = 'N';
+
     private $siteId;
 
     private $hashKey;
@@ -118,13 +120,13 @@ class cgp_generic {
         if (! $isValidPm) {
             die('Illegal payment type');
         }
-        
+
         $processor = mysqli_real_escape_string($this->link, 'cc_cgp_' . $pm_type . '.php');
         $query = sprintf("SELECT * FROM " . $sql_tbl['ccprocessors'] . " WHERE processor = '%s' LIMIT 1", $processor);
         $result = mysqli_query($this->link, $query);
         $s = mysqli_fetch_assoc($result);
         $this->version = $s['param01'];
-        $this->testMode = $s['param02'];
+        $this->testMode = $s['testmode'];
         $this->siteId = $s['param03'];
         $this->hashKey = $s['param04'];
         $this->currency = $s['param05'];
@@ -132,6 +134,10 @@ class cgp_generic {
         $this->prefix = $s['param08'];
         $this->language = $s['param09'];
         $this->pmType = $pm_type;
+
+        if ( $pm_type == 'ideal' ) {
+            $this->showIssuers = $s['param02'];
+        }
         
         if ($s['param07'] == 'Y') {
             $this->logToFile = true;
@@ -186,6 +192,10 @@ class cgp_generic {
     function onCallback() {
         $this->setReturnData();
         return $this->verifyData();
+    }
+
+    function showIssuers() {
+        return $this->showIssuers;
     }
 
     private function verifyData() {
@@ -244,8 +254,7 @@ class cgp_generic {
         } else {
             $country = "NL"; // Default country
         }
-        ;
-        
+
         // Language check
         if ($this->language == "DETECT") {
             if (in_array(strtoupper($shop_language), array(
@@ -256,9 +265,8 @@ class cgp_generic {
             } else {
                 $this->language = "EN"; // Default Language
             }
-            ;
         }
-        ;
+
         
         $cartitems = array();
         $products = $cart['products'];
@@ -360,7 +368,7 @@ class cgp_generic {
         
         $fields['hash'] = md5($hash_prefix . $this->siteId . $fields['amount'] . $fields['ref'] . $this->hashKey);
         // with an iDEAL transaction, include the bank parameter
-        if ($this->pmType == 'ideal') {
+        if ($this->pmType == 'ideal' && $this->showIssuers == 'Y') {
             $fields['suboption'] = $_COOKIE['cgp_bank'];
         }
         
