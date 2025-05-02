@@ -28,16 +28,6 @@ vim: set ts=2 sw=2 sts=2 et:
 	</td>
 </tr>
 <tr>
-	<td>Show Issuers</td>
-	<td>
-		<select name="param02">
-			<option value="N"{if $module_data.param02 eq "N"} selected="selected"{/if}>Without issuers</option>
-			<option value="Y"{if $module_data.param02 eq "Y"} selected="selected"{/if}>With issuers</option>
-		</select><br>
-		iDEAL v2 will not show issuers any more by default (Mandatory by iDEAL).
-	</td>
-</tr>
-<tr>
 	<td>Site ID:</td>
 	<td><input type="text" name="param03" size="24" value="{$module_data.param03|escape}" /></td>
 </tr>

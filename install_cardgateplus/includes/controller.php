@@ -37,7 +37,6 @@ $files = array(
     "../payment/cardgateplus/cardgateplus_lib.php",
     "../payment/cardgateplus/getback.php",
     "../payment/cardgateplus/result.php",
-    "../include/templater/plugins/modifier.cgpbanks.php",
     "../include/templater/plugins/modifier.cgpgiftcarddetails.php"
 );
 
