@@ -64,8 +64,6 @@ class cgp_generic {
 
     private $testMode;
 
-    protected $showIssuers = 'N';
-
     private $siteId;
 
     private $hashKey;
@@ -134,10 +132,6 @@ class cgp_generic {
         $this->prefix = $s['param08'];
         $this->language = $s['param09'];
         $this->pmType = $pm_type;
-
-        if ( $pm_type == 'ideal' ) {
-            $this->showIssuers = $s['param02'];
-        }
         
         if ($s['param07'] == 'Y') {
             $this->logToFile = true;
@@ -166,6 +160,9 @@ class cgp_generic {
     }
 
     function setReturnData() {
+        $o = new class  {
+
+        };
         $o->transactionID = $_POST['transactionid'];
         $o->siteId = $_POST['site_id'];
         $o->isTest = $_POST['is_test'];
@@ -192,10 +189,6 @@ class cgp_generic {
     function onCallback() {
         $this->setReturnData();
         return $this->verifyData();
-    }
-
-    function showIssuers() {
-        return $this->showIssuers;
     }
 
     private function verifyData() {
@@ -274,7 +267,7 @@ class cgp_generic {
         foreach ($products as $product) {
             $keys = func_query_hash("SELECT * FROM $sql_tbl[products] WHERE productid='" . $product['productid'] . "'");
             $item = array();
-            $item['stock'] = $keys[$productid][0]['avail'];
+            $item['stock'] = $keys[$product['productid']][0]['avail'];
             $item['quantity'] = $product['amount'];
             $item['sku'] = $product['productcode'];
             $item['name'] = $product['product'];
@@ -367,10 +360,6 @@ class cgp_generic {
         }
         
         $fields['hash'] = md5($hash_prefix . $this->siteId . $fields['amount'] . $fields['ref'] . $this->hashKey);
-        // with an iDEAL transaction, include the bank parameter
-        if ($this->pmType == 'ideal' && $this->showIssuers == 'Y') {
-            $fields['suboption'] = $_COOKIE['cgp_bank'];
-        }
         
         // with giftcard, include cardnumber and pin
         if ($this->pmType == 'giftcard') {
@@ -440,115 +429,6 @@ class cgp_generic {
         }
         return false;
     }
-
-    function generateBankHtml() {
-        $html = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
-        
-        if ($this->getBankOptions()) {
-            $aIssuers = $this->getBankOptions();
-        } else {
-            $aIssuers = array(
-                '0' => 'No bank options available'
-            );
-        }
-        
-        $html .= '<select name="bank_options" id="bank_options" style="width:170px;" onchange="store_bank(this.value)">';
-        foreach ($aIssuers as $id => $name) {
-            $html .= '<option value="' . $id . '"';
-            if (isset($_COOKIE['cgp_bank']) && $id == $_COOKIE['cgp_bank']) {
-                $html .= ' selected="selected" ';
-            }
-            $html .= '">' . $name . '</option>';
-        }
-        $html .= '</select>';
-        return $html;
-    }
-
-    protected function getBankOptions() {
-        $this->checkIssuers();
-        return $this->fetchIssuers();
-    }
-
-    protected function checkIssuers() {
-        global $sql_tbl;
-        $query = sprintf("SELECT * FROM " . $sql_tbl['config'] . " WHERE name = 'cardgate_issuer_refresh' LIMIT 1");
-        $result = mysqli_query($this->link, $query);
-        $s = mysqli_fetch_assoc($result);
-        if (! is_array($s)) {
-            $issuerRefresh = $this->testMode . '0';
-            $query = sprintf("INSERT INTO " . $sql_tbl['config'] . " (name, value, type) VALUES ('cardgate_issuer_refresh',0,'text')");
-            $result = mysqli_query($this->link, $query);
-        }
-        $query = sprintf("SELECT * FROM " . $sql_tbl['config'] . " WHERE name = 'cardgate_issuer_refresh' LIMIT 1");
-        $result = mysqli_query($this->link, $query);
-        $s = mysqli_fetch_assoc($result);
-        $testMode = substr($s['value'], 0, 1);
-        $refreshTime = substr($s['value'], 1);
-
-        if (($this->testMode<>$testMode) || ($refreshTime < time())){
-            $this->refreshIssuers();
-    }
-}
-    
-    protected function refreshIssuers(){
-        global $sql_tbl;
-        $query = sprintf( "SELECT * FROM " . $sql_tbl['config'] . " WHERE name = 'cardgate_issuers' LIMIT 1");
-        $result = mysqli_query( $this->link, $query );
-        $s = mysqli_fetch_assoc( $result );
-        if (!is_array($s)){
-            $query = sprintf("INSERT INTO ".$sql_tbl['config']." (name, value, type) VALUES ('cardgate_issuers','','text')");
-            $result = mysqli_query( $this->link, $query );
-        }
-        
-        if ($this->testMode == 'Y'){
-            $url = 'https://secure-staging.curopayments.net/cache/idealDirectoryCUROPayments.dat';
-        } else {
-            $url = 'https://secure.curopayments.net/cache/idealDirectoryCUROPayments.dat';
-        }
-        
-        if ( !ini_get( 'allow_url_fopen' ) || !function_exists( 'file_get_contents' ) ) {
-            $result = false;
-        } else {
-            $result = file_get_contents( $url );
-        }
-        
-        if ( $result ) {
-            $aBanks = unserialize( $result );
-            $aBanks[0] = '-Maak uw keuze a.u.b.-';
-        }
-
-        if (array_key_exists("INGBNL2A", $aBanks)) {
-            $sBanks = serialize($aBanks);
-            $query = sprintf("UPDATE ".$sql_tbl['config']." SET value='{$sBanks}' WHERE name='cardgate_issuers'");
-            $result = mysqli_query( $this->link, $query );
-            $iIssuerRefresh = $this->testMode;
-            $iIssuerRefresh .= 24 * 60 * 60 + time();
-            $query = sprintf( "UPDATE " . $sql_tbl['config'] . " SET value='{$iIssuerRefresh}' WHERE name='cardgate_issuer_refresh'" );
-            $result = mysqli_query( $this->link, $query );
-        }
-    }
-    
-    protected function fetchIssuers(){
-        global $sql_tbl;
-        $query = sprintf( "SELECT * FROM " . $sql_tbl['config'] . " WHERE name = 'cardgate_issuers' LIMIT 1");
-        $result = mysqli_query( $this->link, $query );
-        $s = mysqli_fetch_assoc( $result );
-        $aBanks = unserialize($s['value']);
-        return $aBanks;
-    }
-
-    function generateBankScript() {
-        $html = '<script type="text/javascript">
-						function store_bank(value){
-							var exdate=new Date();
-							exdate.setDate(exdate.getDate() + 365);
-							var c_value=escape(value) + "; expires=" + exdate.toUTCString();
-							document.cookie="cgp_bank=" + c_value;
-						}
-					</script>';
-        return $html;
-    }
-
     function generateGiftcardScript() {
         $html = '<script type="text/javascript">
 						function store_giftcarddetails(){
