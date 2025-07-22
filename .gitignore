@@ -13,6 +13,8 @@ include/templater/plugins/*
 payment/*
 !payment/cardgateplus/
 !payment/cc_cgp_banktransfer.php
+!payment/cc_cgp_bitcoin.php
+!payment/cc_cgp_crypto.php
 !payment/cc_cgp_creditcard.php
 !payment/cc_cgp_directdebit.php
 !payment/cc_cgp_directebanking.php
@@ -23,7 +25,6 @@ payment/*
 !payment/cc_cgp_onlineueberweisen.php
 !payment/cc_cgp_paypal.php
 !payment/cc_cgp_afterpay.php
-!payment/cc_cgp_bitcoin.php
 !payment/cc_cgp_klarna.php
 !payment/cc_cgp_przelewy24.php
 !payment/cgp_notify.php

@@ -19,6 +19,7 @@ $files = array(
     "../payment/cc_cgp_banktransfer.php",
     "../payment/cc_cgp_billink.php",
     "../payment/cc_cgp_bitcoin.php",
+    "../payment/cc_cgp_crypto.php",
     "../payment/cc_cgp_creditcard.php",
     "../payment/cc_cgp_directdebit.php",
     "../payment/cc_cgp_directebanking.php",
@@ -45,6 +46,7 @@ $db_payment_templates['afterpay'] = 'offline.tpl';
 $db_payment_templates['banktransfer'] = 'offline.tpl';
 $db_payment_templates['billink'] = 'offline.tpl';
 $db_payment_templates['bitcoin'] = 'offline.tpl';
+$db_payment_templates['crypto'] = 'offline.tpl';
 $db_payment_templates['creditcard'] = 'offline.tpl';
 $db_payment_templates['directdebit'] = 'offline.tpl';
 $db_payment_templates['directebanking'] = 'offline.tpl';
@@ -66,6 +68,7 @@ $payment_names['afterpay'] = 'Afterpay';
 $payment_names['banktransfer'] = 'Bank Transfer';
 $payment_names['billink'] = 'Billink';
 $payment_names['bitcoin'] = 'Bitcoin';
+$payment_names['crypto'] = 'Crypto';
 $payment_names['creditcard'] = 'Credit Card';
 $payment_names['directdebit'] = 'Direct Debit';
 $payment_names['directebanking'] = 'DIRECTebanking';
@@ -86,6 +89,7 @@ $payment_templates['afterpay'] = 'cgp_afterpay.tpl';
 $payment_templates['banktransfer'] = 'cgp_banktransfer.tpl';
 $payment_templates['billink'] = 'cgp_billink.tpl';
 $payment_templates['bitcoin'] = 'cgp_bitcoin.tpl';
+$payment_templates['crypto'] = 'cgp_crypto.tpl';
 $payment_templates['creditcard'] = 'cgp_creditcard.tpl';
 $payment_templates['directdebit'] = 'cgp_directdebit.tpl';
 $payment_templates['directebanking'] = 'cgp_directebanking.tpl';

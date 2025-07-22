@@ -95,7 +95,8 @@ class cgp_generic {
         'paysafecash',
         'przelewy24',
         'onlineueberweisen',
-        'spraypay'
+        'spraypay',
+        'crypto'
     );
 
     function __construct($pm_type) {
